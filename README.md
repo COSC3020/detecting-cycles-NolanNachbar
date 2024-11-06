@@ -30,15 +30,16 @@ function hasCycle(graph) {
         visited[node] = true;
         path[node] = true;
         
-        for(let i = 0; i < graph[node].length; i++){
+        for(let i = 0; i < graph[node].length; i++){ // This will run once for every edge
             if(cycleHelp(graph[node][i]))
               return true;
         }
+
         path[node] = false;
         return false;
     }
     
-    for (let node = 0; node < graph.length; node++) {
+    for (let node = 0; node < graph.length; node++) { // This will run once for every node.
         if (!visited[node] && cycleHelp(node)) {
             return true;
         }
@@ -47,3 +48,9 @@ function hasCycle(graph) {
     return false;
 }
 ```
+
+The worst case would be when there is no cycle and it has to check every edge of every node. This means that in the worst case the firs loop will run $E$ times and the second loop will run $E$ times. Thus the worst-case big $\Theta$ complexity of it is $\Theta(V + E)$.
+
+I started by taking my DFS code and test code and modifying it to fit the assignment. I looked at the graphs slides and saw on slide 26 that you "need to take care if there are cycles" when searching and thatgave my the idea. I took the idea of marking the arrays like ```path[node] = true``` from https://github.com/COSC3020/detecting-isomorphism-NolanNachbar/tree/NolanNachbar-patch-1. 
+
+I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
