@@ -15,3 +15,35 @@ the function and run automatically when you commit through a GitHub action.
 
 What is the worst-case big $\Theta$ complexity of your implementation? Add your
 answer, including your reasoning, to this markdown file.
+
+Recall my code,
+```js
+function hasCycle(graph) {
+    let visited = [];
+    let path = [];
+    let result = false;
+    
+    function cycleHelp(node){
+        if (path[node]) return true;
+        if (visited[node]) return false;
+        
+        visited[node] = true;
+        path[node] = true;
+        
+        for(let i = 0; i < graph[node].length; i++){
+            if(cycleHelp(graph[node][i]))
+              return true;
+        }
+        path[node] = false;
+        return false;
+    }
+    
+    for (let node = 0; node < graph.length; node++) {
+        if (!visited[node] && cycleHelp(node)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+```
